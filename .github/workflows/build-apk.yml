@@ -29,13 +29,12 @@ jobs:
         run: |
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
           echo "$ANDROID_HOME/ndk/25.2.9519653" >> "$GITHUB_PATH"
-          echo "$ANDROID_HOME/ndk/25.2.9519653" >> "$GITHUB_ENV"
           echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.2.9519653" >> "$GITHUB_ENV"
 
       - name: Build legacy native library
         working-directory: app/src/main/jni
         run: |
-          "$ANDROID_HOME/ndk/25.2.9519653/ndk-build" NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=Android.mk NDK_APPLICATION_MK=Application.mk
+          "$ANDROID_HOME/ndk/25.2.9519653/ndk-build"
           mkdir -p ../jniLibs
           if [ -d ../libs ]; then
             cp -R ../libs/. ../jniLibs/
